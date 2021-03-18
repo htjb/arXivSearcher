@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+from arXivSearcher.search import searcher
+import argparse
+import sys
+
+parser = argparse.ArgumentParser(
+    description='arXiv Search Terminal Tool')
+parser.add_argument(
+    's', type=str, default='foobar',
+    help='the string to search')
+parser.add_argument(
+    '-dl', const=True, default=False, nargs='?',
+    help='a flag indicating whether the results should be limited to' +
+    ' articles published today.')
+parser.add_argument(
+    '-mr', type=int, default=5,
+    help='the maximum number of articles to return.')
+args = parser.parse_args()
+dl = args.dl
+mr = args.mr
+s = args.s
+
+searcher(s, date_limited=dl, max_results=mr)
