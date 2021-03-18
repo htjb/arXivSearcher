@@ -59,7 +59,7 @@ Alternatively you can call the function directly in a python script like so
 
 An example search using the terminal is shown below.
 
-.. image:: https://github.com/htjb/arXivSearcher/raw/master/images/example.png
+.. image:: https://github.com/htjb/arXivSearcher/blob/main/images/example.png
   :width: 400
   :align: center
   :alt: Example Search Result
