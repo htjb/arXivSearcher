@@ -9,7 +9,7 @@ def readme(short=False):
 
 setup(
     name='arXivSearcher',
-    version='1.0.0-beta.0',
+    version='1.0.0-beta.1',
     description='arXiv search terminal tool',
     long_description=readme(),
     author='Harry T. J. Bevins',

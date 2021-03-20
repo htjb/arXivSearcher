@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date, timedelta
+from arXivSearcher.output import output_type
 
 
 class searcher():
@@ -8,7 +9,7 @@ class searcher():
         self.split_search = search.split(" ")
         self.max_results = kwargs.pop('max_results', 5)
         self.date_limited = kwargs.pop('date_limited', False)
-        self.print = kwargs.pop('print', True)
+        self.type = kwargs.pop('output_type', 'print')
 
         def fill(find, i, updated, published):
             find['update_date'] = updated
@@ -50,22 +51,5 @@ class searcher():
                 fill(find, i, updated, published)
             if find:
                 self.finds.append(find)
-
-        if self.print is True:
-            print('arXiv search results for \"' + search + '\":\n')
-            self.finds = list(reversed(self.finds))
-            for i in range(len(self.finds)):
-                print('~'*80 + '\n' +
-                      'TITLE: ' + str(self.finds[i]['title']) + '\n\n' +
-                      'URL: ' + str(self.finds[i]['id']) + '\n\n' +
-                      'UPDATED: ' + str(self.finds[i]['update_date']) +
-                      ', PUBLISHED: ' + str(self.finds[i]['published_date']) +
-                      '\n\n' +
-                      'AUTHORS: ' + ', '.join([
-                        self.finds[i]['author_' + str(j)]
-                        for j in range(self.finds[i]['authors_len'])]) +
-                      '\n\n' +
-                      'ABSTRACT: ' + str(self.finds[i]['abstract']))
-            print(str(len(self.finds)) +
-                  ' results returned. Max search results set at '
-                  + str(self.max_results))
+                    
+        output_type(self.type, self.finds, search, self.max_results)
