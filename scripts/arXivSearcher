@@ -7,17 +7,22 @@ parser = argparse.ArgumentParser(
     description='arXiv Search Terminal Tool')
 parser.add_argument(
     's', type=str, default='foobar',
-    help='the string to search')
+    help='The string to search for.')
 parser.add_argument(
     '-dl', const=True, default=False, nargs='?',
-    help='a flag indicating whether the results should be limited to' +
-    ' articles published today.')
+    help='A boolean indicating whether the results should be limited to' +
+    'articles published today.')
 parser.add_argument(
     '-mr', type=int, default=5,
-    help='the maximum number of articles to return.')
+    help='The maximum number of articles to return.')
+parser.add_argument(
+    '-t', type=str, default='print',
+    help="The type of output requested. Options include 'print' and 'email'." +
+    "Default is 'print'.")
 args = parser.parse_args()
 dl = args.dl
 mr = args.mr
 s = args.s
+t = args.t
 
-searcher(s, date_limited=dl, max_results=mr)
+searcher(s, date_limited=dl, max_results=mr, output_type=t)
