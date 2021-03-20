@@ -14,7 +14,7 @@ class output_type():
             if self.type == 'txt':
                 sys.stdout = open('arXiv_search_' +
                                   '_'.join(search.split(' ')) + '.txt', 'w')
-            print('arXiv search results for \"' + search + '\":\n')
+            print('arXivSearcher results for \"' + search + '\":\n')
             if self.type == 'print':
                 self.finds = list(reversed(self.finds))
             for i in range(len(self.finds)):
@@ -48,10 +48,10 @@ class output_type():
 
             msg['From'] = email
             msg['To'] = email
-            msg['Subject']= 'arXiv search results for \"' + search + '\"'
+            msg['Subject']= 'arXivSearcher results for \"' + search + '\"'
 
             parts = []
-            preamble = 'arXiv search results for \"' + search + '\":\n\n'
+            preamble = 'arXivSearcher results for \"' + search + '\":\n\n'
             count = 0
             for i in range(len(self.finds)):
                 if 'title' in self.finds[i]:
@@ -79,7 +79,7 @@ class output_type():
             box = imapclient.IMAPClient('imap-mail.outlook.com', ssl=True)
             box.login(email, password)
             box.select_folder('Sent Items')
-            IDs = box.search('SUBJECT "arXiv search results for"')
+            IDs = box.search('SUBJECT "arXivSearcher results for"')
             box.delete_messages(IDs)
             box.expunge()
             box.logout()
