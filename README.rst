@@ -90,13 +90,12 @@ The code used to email the results sends the email to the same address that
 recieves the message. As a result the email appears in both your Inbox and
 Sent box. ``arXivSearcher`` will proceed to delete the email from your sent
 box and this has been tested and shown to be working. However, it is worth
-testing before you start making lots of searches.
+testing once yourself before you start making lots of searches.
 
 To Do:
 ~~~~~~
 - make the search options broader e.g. author ect rather than just strings
-- add code to optionally email results to user (written just needs formatting
-  as part of the module)
+- extend email code to other types of email
 - config file/cron job for daily update on a given search?
 
 Documentation
