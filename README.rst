@@ -52,8 +52,9 @@ Alternatively you can call the function directly in a python script like so
 .. code:: python
 
   from arXivSearcher.search import searcher
+  import asyncio
 
-  searcher('string to search', date_limited=False, max_results=50)
+  asyncio.run(searcher('string to search', date_limited=False, max_results=50))
 
 An example search using the terminal is shown below.
 
