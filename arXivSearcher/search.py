@@ -19,7 +19,7 @@ async def searcher(
 
     split_search = search.split(" ")
 
-    def fill(find, i, updated, published):
+    def fill(find: dict, i: int, updated: str, published: str):
         find["update_date"] = updated
         find["published_date"] = published
         find["title"] = title_elems[i].find("title").text
