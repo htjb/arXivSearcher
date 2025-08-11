@@ -23,6 +23,7 @@ To install from source run
   cd arXivSearcher
   python setup.py install --user
 
+For instructions on how to set up this package with MCP see the MCP section below.
 You can then perform searches from the terminal by entering the following
 
 .. code:: bash
@@ -68,24 +69,21 @@ MCP
 
 arXivSearcher can also be used with MCP. To use it with MCP you need to
 add the following to your MCP configuration file. For example if you are 
-using claude you would add it to "mcpServers" in your 
-"claude_desktop_config.json" file.
+using claude you would add it to `mcpServers` in your 
+`claude_desktop_config.json` file.
 
-```
-"arXiv": {
-      "command": "/path/to/python",
-      "args": [
-        "/path/to/arXivSearcher/arXivSearcher/search.py"]
+```json
+"mcpServers": {
+  "arXiv": {
+    "command": "/path/to/python",
+    "args": [
+      "/path/to/arXivSearcher/arXivSearcher/search.py"]
   }
+}
 ```
-
-Licence
--------
-
-The software is free to use on the MIT open source license.
 
 Contributing
 ------------
 
-While the code is in pre-release suggestions for features and existing bug fixes
+Suggestions for features and existing bug fixes
 are welcome. Please raise an issue to discuss any pull requests.
