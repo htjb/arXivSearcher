@@ -71,7 +71,7 @@ async def searcher(
     print('arXivSearcher results for "' + search + '":\n')
 
     finds = list(reversed(finds))
-    formatted_finds = []
+    formatted_finds = {}
     for i in range(len(finds)):
         output = ("~" * 80
             + "\n"
@@ -97,7 +97,7 @@ async def searcher(
             + "ABSTRACT: "
             + str(finds[i]["abstract"]))
         print(output)
-        formatted_finds.append(output)
+        formatted_finds['article' + str(i)] = output
     print(
         str(len(finds))
         + " results returned. Max search results set at "
