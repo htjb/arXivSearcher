@@ -1,14 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date, timedelta
-from arXivSearcher.output import output_type
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP()
 
 
-def searcher(search, **kwargs):
+@mcp.tool()
+async def searcher(
+    search: str, max_results: int = 5, date_limited: bool = False
+):
+    """
+    Searches arXiv for articles matching the search string.
+    :param search: The string to search for.
+    :param max_results: The maximum number of articles to return.
+    :param date_limited: If True, only articles published today will be returned.
+    """
+
     split_search = search.split(" ")
-    max_results = kwargs.pop("max_results", 5)
-    date_limited = kwargs.pop("date_limited", False)
-    type = kwargs.pop("output_type", "print")
 
     def fill(find, i, updated, published):
         find["update_date"] = updated
@@ -51,4 +60,44 @@ def searcher(search, **kwargs):
         if find:
             finds.append(find)
 
-    output_type(type, finds, search, max_results)
+
+    print('arXivSearcher results for "' + search + '":\n')
+
+    finds = list(reversed(finds))
+    for i in range(len(finds)):
+        print(
+            "~" * 80
+            + "\n"
+            + "TITLE: "
+            + str(finds[i]["title"])
+            + "\n\n"
+            + "URL: "
+            + str(finds[i]["id"])
+            + "\n\n"
+            + "UPDATED: "
+            + str(finds[i]["update_date"])
+            + ", PUBLISHED: "
+            + str(finds[i]["published_date"])
+            + "\n\n"
+            + "AUTHORS: "
+            + ", ".join(
+                [
+                    finds[i]["author_" + str(j)]
+                    for j in range(finds[i]["authors_len"])
+                ]
+            )
+            + "\n\n"
+            + "ABSTRACT: "
+            + str(finds[i]["abstract"])
+        )
+    print(
+        str(len(finds))
+        + " results returned. Max search results set at "
+        + str(max_results)
+    )
+    return finds
+
+
+if __name__ == "__main__":
+    # Initialize and run the server
+    mcp.run(transport="stdio")
