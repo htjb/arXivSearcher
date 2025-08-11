@@ -20,6 +20,13 @@ async def searcher(
     split_search = search.split(" ")
 
     def fill(find: dict, i: int, updated: str, published: str):
+        """Fills the find dictionary with the relevant information from the
+        BeautifulSoup elements.
+        :param find: The dictionary to fill with the article information.
+        :param i: The index of the article in the BeautifulSoup elements.
+        :param updated: The updated date of the article.
+        :param published: The published date of the article.
+        """
         find["update_date"] = updated
         find["published_date"] = published
         find["title"] = title_elems[i].find("title").text
